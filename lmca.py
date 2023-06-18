@@ -2,7 +2,6 @@ import openai
 import re
 
 SYS_PROMPT = open("PROMPT_sys.txt").read()
-BEGIN_PROMPT = open("PROMPT_user.txt").read()
 
 openai.api_key = "YOUR-API-KEY"
 messages = [

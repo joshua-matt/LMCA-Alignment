@@ -47,7 +47,6 @@ class Environment:
             i += np.random.geometric(self.p)  # Fill p% of spaces with key or chest
 
     def move_agent(self, move):
-        move = move.lower()
         self.level[self.agent_loc] = 0
         prev_loc = self.agent_loc
         self.agent_loc = tuple(map(add, self.agent_loc, self.moves[move])) # agent location += move
@@ -78,6 +77,21 @@ class Environment:
     def move_sequence(self, moves):
         for move in moves:
             self.move_agent(move)
+
+    def to_state(self):
+        walls = []
+        keys = []
+        chests = []
+
+        for i in range(self.sz):
+            for j in range(self.sz):
+                if self.level[i,j] == 1:
+                    walls.append((i,j))
+                elif self.level[i,j] == 2:
+                    keys.append((i,j))
+                elif self.level[i,j] == 3:
+                    chests.append((i,j))
+        return f"Walls: {walls}, Keys: {keys}, Chests: {chests}"
 
     def show(self):
         cmap = colors.ListedColormap(['black', 'white', 'yellow', 'brown', 'blue'])

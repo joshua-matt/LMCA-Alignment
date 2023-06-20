@@ -11,13 +11,14 @@ def generate_prompt():
     global prev_move
     global result
 
-    state = str(env.level).replace("\n", " ")
+    state = env.to_state()
     prev_step = f"{str(prev_move)}, {result}"
     n_keys = str(env.nkeys)
+    pos = str(env.agent_loc)
 
-    return f"STATE: {state}\nPREV_STEP: {prev_step}\nNUMBER_KEYS: {n_keys}"
+    return f"STATE: {state}\nPREV_STEP: {prev_step}\nNUMBER_KEYS: {n_keys}\nCURRENT_POS: {pos}"
 
-user_control = True
+user_control = False
 colors = {0: (0,0,0),
           1: (255,255,255),
           2: (255,255,0),
@@ -59,6 +60,7 @@ while running:
         prompt = generate_prompt()
         prev_move = lmca_move(prompt)
         result = env.move_agent(prev_move)
+
     pg.display.flip()
 
 pg.quit()

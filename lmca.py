@@ -3,7 +3,7 @@ import re
 
 SYS_PROMPT = open("PROMPT_sys_v3.txt").read()
 
-openai.api_key = "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"
+openai.api_key = "YOUR_KEY_HERE
 messages = [
     {"role": "system", "content": SYS_PROMPT},
     {"role": "user", "content": ""}
